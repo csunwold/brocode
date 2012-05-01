@@ -1,1 +1,3 @@
-var parser = require("./parser")
+var parser = require("./parser");
+
+var compiler = require("./jsCompiler");
