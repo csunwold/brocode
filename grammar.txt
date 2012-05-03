@@ -1,8 +1,11 @@
 start
   = statements
 
+whitespace
+  = [ \r\n]+
+
 statements
-    = statements:statement* { return {type:'statements',statements:statements} }
+    = statements:(statement whitespace?)* { return {type:'statements',statements:statements.map(function(a){return a[0];})} }
 
 statement
   = output
