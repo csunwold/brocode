@@ -21,7 +21,7 @@ expression
   / int
 
 string
-  = '"' literal:[a-zA-Z]+ '"'  { return {type:'string',value:literal.join("")} }
+  = '"' literal:[^"]+ '"'  { return {type:'string',value:literal.join("")} }
   / "'" literal:[^']+ "'"  { return {type:'string',value:literal.join("")} }
 
 int
