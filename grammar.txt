@@ -20,12 +20,12 @@ expression
   = additive
 
 additive
-  = left:multiplicative ws? "+" ws? right:additive { return {type:'binaryop',op:"+",left:left,right:right} }
+  = left:multiplicative ws? op:[-+] ws? right:additive { return {type:'binaryop',op:op,left:left,right:right} }
   / value:multiplicative
 
 
 multiplicative
-  = left:primary ws? "*" ws? right:multiplicative { return {type:'binaryop',op:"*",left:left,right:right} }
+  = left:primary ws? op:[*/] ws? right:multiplicative { return {type:'binaryop',op:op,left:left,right:right} }
   / value:primary
 
 primary
