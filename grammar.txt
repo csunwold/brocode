@@ -26,7 +26,7 @@ string
   / "'" literal:[^']+ "'"  { return {type:'string',value:literal.join("")} }
 
 int
-  = value:[0-9]+ { return {type:'int',value:parseInt(value.join(''))} }
+  = value:[0-9]+ { return {type:'int',value:value.join('')} }
 
 float
-  = value:([0-9]* "." [0-9]+) { return {type:'float',value:parseFloat(value[0].join('')+"."+value[2].join(''))} }
+  = value:([0-9]* "." [0-9]+) { return {type:'float',value:value[0].join('')+"."+value[2].join('')} }
