@@ -17,7 +17,22 @@ outputIndicator
   = "DUDE," ws "CHECK" ws "OUT" ws
 
 expression
-  = string
+  = additive
+
+additive
+  = left:multiplicative ws? "+" ws? right:additive { return {type:'binaryop',op:"+",left:left,right:right} }
+  / value:multiplicative
+
+
+multiplicative
+  = left:primary ws? "*" ws? right:multiplicative { return {type:'binaryop',op:"*",left:left,right:right} }
+  / value:primary
+
+primary
+  = "(" ws? value:expression ws? ")" { return {type:'parenthesis',value:value} }
+  / literal
+
+literal = string
   / float
   / int
 
