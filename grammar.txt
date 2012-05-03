@@ -23,7 +23,6 @@ additive
   = left:multiplicative ws? op:[-+] ws? right:additive { return {type:'binaryop',op:op,left:left,right:right} }
   / value:multiplicative
 
-
 multiplicative
   = left:primary ws? op:[*/] ws? right:multiplicative { return {type:'binaryop',op:op,left:left,right:right} }
   / value:primary
@@ -34,12 +33,16 @@ primary
 
 unary
   = "-" primary:primary  { return {type:'unaryop',op:'-',value:primary} }
+  / identifier
   / literal
 
 literal
   = string
   / float
   / int
+
+identifier
+  = name:[a-zA-Z]+ { return {type:'identifier',name:name.join('')} }
 
 string
   = '"' literal:[^"]+ '"'  { return {type:'string',value:literal.join("")} }
