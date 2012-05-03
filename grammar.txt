@@ -1,0 +1,22 @@
+start
+  = statement*
+
+statement
+  = output
+
+output
+  = outputIndicator expression:expression { return {type:'output',value:expression} }
+
+outputIndicator
+  = "DUDE, CHECK OUT "
+
+expression
+  = string
+  / int
+
+string
+  = '"' literal:[a-zA-Z]+ '"'  { return {type:'string',value:literal.join("")} }
+  / "'" literal:[^']+ "'"  { return {type:'string',value:literal.join("")} }
+
+int
+  = value:[0-9]+ { return {type:'int',value:parseInt(value.join(''))} }
