@@ -30,9 +30,14 @@ multiplicative
 
 primary
   = "(" ws? value:expression ws? ")" { return {type:'parenthesis',value:value} }
+  / unary
+
+unary
+  = "-" primary:primary  { return {type:'unaryop',op:'-',value:primary} }
   / literal
 
-literal = string
+literal
+  = string
   / float
   / int
 
