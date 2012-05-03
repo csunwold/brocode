@@ -1,5 +1,8 @@
 start
-  = statement*
+  = statements
+
+statements
+    = statements:statement* { return {type:'statements',statements:statements} }
 
 statement
   = output
