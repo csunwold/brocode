@@ -1,5 +1,5 @@
 start
-  = statements
+  = ws? statements
 
 ws
   = [ \r\n]+
@@ -33,6 +33,10 @@ primary
 
 unary
   = "-" primary:primary  { return {type:'unaryop',op:'-',value:primary} }
+  / simple
+
+simple
+  = function
   / identifier
   / literal
 
@@ -53,3 +57,9 @@ int
 
 float
   = value:([0-9]* "." [0-9]+) { return {type:'float',value:value[0].join('')+"."+value[2].join('')} }
+
+function
+  = "WITH" ws? parameters:("(" parameters ")" ws?)? "LETS" ws statements:statements "PEACE" { return {type:'function',parameters:parameters[1],statements:statements} }
+
+parameters
+  = first:identifier rest:(ws? "," ws? identifier)* ws? { var result = rest.map(function (other) { return other[3].name }); result.splice(0,0,first.name); return result; }
