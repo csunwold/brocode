@@ -1,11 +1,11 @@
 start
   = statements
 
-whitespace
+ws
   = [ \r\n]+
 
 statements
-    = statements:(statement whitespace?)* { return {type:'statements',statements:statements.map(function(a){return a[0];})} }
+    = statements:(statement ws?)* { return {type:'statements',statements:statements.map(function(a){return a[0];})} }
 
 statement
   = output
@@ -14,7 +14,7 @@ output
   = outputIndicator expression:expression { return {type:'output',value:expression} }
 
 outputIndicator
-  = "DUDE, CHECK OUT "
+  = "DUDE," ws "CHECK" ws "OUT" ws
 
 expression
   = string
